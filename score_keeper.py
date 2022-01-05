@@ -6,7 +6,7 @@ from collections import Counter
 
 #Press Enter to run on current "operator.log" or enter ".<number>" of any previous "operator.log" files to get previous scores. 
 
-#datetime = re.findall(r"(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})
+#datetime = re.findall(r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})
 #ip = re.findall(r"valid share from (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})"
 #miner_address = re.findall(r'\(.*?\)'
 #block = re.findall(r"for block (\d+)")
