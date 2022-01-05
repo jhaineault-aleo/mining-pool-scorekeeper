@@ -3,9 +3,12 @@ from collections import Counter
 
 #reads continuously running "operator.log" file and counts the number of times each ip address appears with "Operator received a valid share from IP"
 #prints "<ip> : <count>" in descending order and gives the total count of all ips at the end.
+
+#Press Enter to run on current "operator.log" or enter ".<number>" of any previous "operator.log" files to get previous scores. 
 count_dict = {}
 
-with open('operator.log', 'r') as f:
+filename = input("Enter operator.log number: ")
+with open('operator.log' + filename, 'r') as f:
     for line in f:
         matches = re.findall(r"valid share from (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})", line)
         if len(matches) > 0:
