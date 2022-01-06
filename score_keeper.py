@@ -51,11 +51,13 @@ def main():
                             count_dict[res] = count_dict[res] + 1
                         else:
                             count_dict[res] = 1
+        f.close()
                             
     for k, v in count_dict.items():
         #print(k,v)
         with open("sk_db.json", "w") as f:
-            json.dump(list(count_dict), f)
+            json.dump(list(count_dict.items()), f)
+        f.close()
           
                         
 
