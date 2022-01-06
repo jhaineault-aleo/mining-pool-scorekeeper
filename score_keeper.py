@@ -9,6 +9,7 @@ DB_FILE = "sk_db.json"
 
 
 def load_db(filename=DB_FILE):
+    print("In load_db")
     data = {}
     try:
         f = open(filename)
@@ -20,12 +21,14 @@ def load_db(filename=DB_FILE):
 
 
 def save_db(db_dict):
+    print("In save_db")
     with open(DB_FILE, "w") as outfile:
         json.dump(db_dict, outfile)
     return
 
 
 def parse_log(filename="operator.log"):
+    print("In parse_log")
     '''
     Parse a log file, and return a dictionary of all info
     key = datetime stamp
@@ -63,9 +66,11 @@ def main(filename="operator.log"):
     save_db(db_dict)  # so that db can be used later
 
     # Create html file
-    if filename == "operator.log":  # don't create / post a new html if we're ingesting older log files
-        html_generator.main()
-        s3_push.main()  # requires credentials on the server already e.g. ~/.aws/credentials file
+    # if filename == "../operator.log":  # don't create / post a new html if we're ingesting older log files
+    print("In create html file.")
+    html_generator.main()
+    print("In s3 push")
+    s3_push.main()  # requires credentials on the server already e.g. ~/.aws/credentials file
 
 
 if __name__ == "__main__":
