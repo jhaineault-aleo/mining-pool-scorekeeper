@@ -31,7 +31,8 @@ def upload_file(file_name, bucket, object_name=None):
 
 def main():
     file_name = "index.html"
-    bucket = "aleo-leaderboard"
+    #bucket = "aleo-leaderboard"
+    bucket = "aleo-miningpool-leaderboard"
     upload_file(file_name, bucket)
 
 
