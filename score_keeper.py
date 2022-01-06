@@ -46,7 +46,7 @@ def parse_log(filename="operator.log"):
                             "ip": ip[0],
                             "aleo_addr": aleo_addr[0],
                             "block": block[0]}
-                log_dict['dt'] = line_dict
+                log_dict[dt[0]] = line_dict
     return log_dict
     
 
