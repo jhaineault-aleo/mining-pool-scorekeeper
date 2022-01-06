@@ -36,7 +36,7 @@ def parse_log(filename="operator.log"):
     key = datetime stamp
     value = dictionary of our info
     '''
-    log_dict = {}
+    log_dict = {}  # { dt : { dt:dt, ip:ip, aleo_addr:aleo_addr, block:block} ....}
     with open(filename, 'r') as myfile:
         for line in myfile:
             # TODO FOR JEFF - grep out our info here (done in previous commit)
