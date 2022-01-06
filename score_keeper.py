@@ -59,8 +59,9 @@ def main(filename=None):
     save_db(db_dict)  # so that db can be used later
 
     # Create html file
-    html_generator.main()
-    s3_push.main()  # requires credentials on the server already e.g. ~/.aws/credentials file
+    if filename == "operator.log":  # don't create / post a new html if we're ingesting older log files
+        html_generator.main()
+        s3_push.main()  # requires credentials on the server already e.g. ~/.aws/credentials file
 
 
 if __name__ == "__main__":
