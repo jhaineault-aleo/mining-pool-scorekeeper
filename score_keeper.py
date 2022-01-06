@@ -50,7 +50,7 @@ def parse_log(filename="operator.log"):
     return log_dict
     
 
-def main(filename=None):
+def main(filename="operator.log"):
     db_dict = load_db()
     log_dict = parse_log(filename)
     
