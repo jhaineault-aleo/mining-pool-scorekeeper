@@ -38,20 +38,50 @@ def save_db(db_dict):
 
 
 def main():
-    '''Creates mining pool db, html file of results, pushes to S3 bucket'''
     count_dict = {}
-    filename = input("Enter operator.log number: ")
-    with open('operator.log' + filename, 'r') as f:
+    
+    pattern = "Operator received a valid share from"
+    with open('operator.log', 'r') as f:
         for line in f:
-            matches = re.findall(
-                r"valid share from (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})", line)
-            if len(matches) > 0:
-                ip = matches[0]
-                if ip in count_dict:
-                    count_dict[ip] = count_dict[ip] + 1
-                else:
-                    count_dict[ip] = 1
-
+            if re.search(pattern, line):
+                #Parses block count
+                block = re.findall(r"for block (\d+)", line)
+                if len(block) > 0:
+                    bl = block[0]
+                    if bl in count_dict:
+                        count_dict[bl] = count_dict[bl] + 1
+                    else:
+                        count_dict[bl] = 1
+                #Parses miner address and block hash
+                miner_address = re.findall(r"\(.*?\)", line)
+                if len(miner_address) > 0:
+                    ma = miner_address[0]
+                    if ma in count_dict:
+                        count_dict[ma] = count_dict[ma] + 1
+                    else:
+                        count_dict[ma] = 1
+                    miner_address.extend(block)
+                #Parses ip address
+                ip_addr = re.findall(
+                    r"valid share from (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,4})", line)
+                if len(ip_addr) > 0:
+                    ip = ip_addr[0]
+                    if ip in count_dict:
+                        count_dict[ip] = count_dict[ip] + 1
+                    else:
+                        count_dict[ip] = 1
+                    ip_addr.extend(miner_address)
+                #Parses timestamp
+                ts = re.findall(
+                    r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})", line)
+                if len(ts) > 0:
+                    timestamp = ts[0]
+                    if timestamp in count_dict:
+                        count_dict[timestamp] = count_dict[timestamp] + 1
+                    else:
+                        count_dict[timestamp] = 1
+                    ts.extend(ip_addr)
+                print(ts)
 
 if __name__ == "__main__":
     main()
