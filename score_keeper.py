@@ -40,6 +40,7 @@ def parse_log(filename="operator.log"):
     with open(filename, 'r') as myfile:
         for line in myfile:
             # TODO FOR JEFF - grep out our info here (done in previous commit)
+            # set values for dt, ip, aleo_addr, block
             line_dict = {"dt": dt,
                          "ip": ip,
                          "aleo_addr": aleo_addr,
