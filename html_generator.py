@@ -50,7 +50,7 @@ def main():
     template = env.get_template("base.html")
     html_file = template.render(vars=ip_sorted_list)
     try:
-        outfile = open("leaderboard.html", "w")
+        outfile = open("index.html", "w")
         outfile.write(html_file)
         outfile.close()
     except Exception as e:
