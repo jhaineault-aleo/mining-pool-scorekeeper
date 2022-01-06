@@ -5,11 +5,6 @@ import json
 import html_generator
 import s3_push
 
-
-# TODO:  Use some sort of cli argument passing library to support  (docopt / argparse and etc)
-# -f input file (optional file name)
-# -h html file (true/false)
-# -s3 bucket name to push to (optional name)
 DB_FILE = "sk_db.json"
 
 
@@ -56,11 +51,9 @@ def parse_log(filename="operator.log"):
                             "ip": ip[0],
                             "aleo_addr": aleo_addr[0],
                             "block": block[0]}
-
                 log_dict['dt'] = line_dict
-                print(log_dict)
     return log_dict
-
+    
 
 def main(filename=None):
     db_dict = load_db()
