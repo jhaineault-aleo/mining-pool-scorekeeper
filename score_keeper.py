@@ -31,29 +31,30 @@ def parse_log(filename="operator.log"):
     key = datetime stamp
     value = dictionary of our info
     '''
-    log_dict = {}  
+    log_dict = {}
     pattern = "Operator received a valid share from"
     with open(filename, 'r') as myfile:
         for line in myfile:
             if re.search(pattern, line):
                 dt = re.findall(
-                    r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}Z)", line) # return just datetimes
+                    r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}Z)", line)  # return just datetimes
                 ip = re.findall(
-                    r"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,4})", line) # return just ips
-                aleo_addr = re.findall(r"\((aleo.*?)\)", line) # return just miner addresses
-                block = re.findall(r"for block (\d+)", line) # return just block
-                line_dict = {"dt": dt[0], 
-                            "ip": ip[0],
-                            "aleo_addr": aleo_addr[0],
-                            "block": block[0]}
+                    r"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,4})", line)  # return just ips
+                # return just miner addresses
+                aleo_addr = re.findall(r"\((aleo.*?)\)", line)
+                # return just block
+                block = re.findall(r"for block (\d+)", line)
+                line_dict = {"dt": dt[0],
+                             "ip": ip[0],
+                             "aleo_addr": aleo_addr[0],
+                             "block": block[0]}
                 log_dict[dt[0]] = line_dict
     return log_dict
-    
+
 
 def main(filename="operator.log"):
     db_dict = load_db()
     log_dict = parse_log(filename)
-    
 
     # Update db_dict if value not already in it
     for key in log_dict.keys():
@@ -73,7 +74,3 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         filename = sys.argv[1]
     main(filename)
-                        
-
-if __name__ == "__main__":
-    main()
