@@ -38,7 +38,6 @@ def save_db(db_dict):
 
 
 def main():
-    '''Creates mining pool db, html file of results, pushes to S3 bucket'''
     count_dict = {}
     
     pattern = "Operator received a valid share from"
